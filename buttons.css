@@ -1,0 +1,40 @@
+/* Color button links: .blink .glink .rlink .ylink */
+
+:root {
+    --button-blue:   #2068C0;
+    --button-green:  #106638;
+    --button-red:    #94283A;
+    --button-yellow: #E8A830;
+    --button-yellow-glow: #AF5000;
+}
+
+.blink, .glink, .rlink, .ylink {
+    display: inline-block;
+    position: relative;
+    margin: 1px 0 1px 1px;
+    padding: 0.19em 6px 0.11em 6px;
+    border-radius: 1000px;
+    box-shadow:
+        -1px 2px 2px rgba(0,0,0,0.4),
+        inset -1px 2px 2px 0 rgba(255,255,255,0.4),
+        inset -0.5px 1px 1px 0 rgba(255,255,255,0.5),
+        inset 1px -1px 2px 0 rgba(0,0,0,0.4);
+    line-height: 120%;
+    white-space: nowrap;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+.blink.min, .glink.min, .rlink.min, .ylink.min { width: min-content; }
+
+.blink, .blink:link, .blink:visited { background-color: var(--button-blue);  color: white; }
+.glink, .glink:link, .glink:visited { background-color: var(--button-green); color: white; }
+.rlink, .rlink:link, .rlink:visited { background-color: var(--button-red);   color: white; }
+.ylink, .ylink:link, .ylink:visited { background-color: var(--button-yellow); color: black; }
+
+.blink:hover, .glink:hover, .rlink:hover { text-shadow: 0 0 5px white; }
+.ylink:hover { text-shadow: 0 0 5px var(--button-yellow-glow); }
+
+/* Extra room for italic text inside a button */
+i .blink, i .glink, i .rlink, i .ylink { padding-right: 7px; }

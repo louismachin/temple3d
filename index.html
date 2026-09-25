@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./buttons.css">
+    <title>Temple3D</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <canvas id="cv" width="320" height="240"></canvas>
+    <div class="bar">
+        <select class="ylink" id="pick" aria-label="Temple">
+            <option value="./layouts/egc_gnostic_mass.txt">E.G.C. Gnostic Mass</option>
+            <option value="./layouts/golden_dawn_neophyte.txt">G.D. Neophyte Hall</option>
+            <option value="./layouts/golden_dawn_vault_of_the_adepti.txt">G.D. Vault of the Adepti</option>
+        </select>
+        <button class="blink" id="bSpin">Pause</button>
+        <button class="glink" id="bWire">Wireframe</button>
+        <button class="glink" id="bRes">Hi-res</button>
+        <button class="glink" id="bTitle">Title</button>
+        <button class="glink" id="bCode">Code</button>
+        <label class="ylink">Open<input id="file" type="file" accept=".txt,text/plain" hidden></label>
+    </div>
+    <div id="code" class="hidden">
+        <textarea id="src" spellcheck="false"></textarea>
+        <details>
+            <summary>Layout format</summary>
+            <pre>
+            One object per line. Lines starting with # are ignored.
+            x, z = centre on the floor, y = base height. Units are metres.
+
+            title   Any Text
+            floor                  w d          colour
+            box     name  x y z    w h d        colour
+            pillar  name  x y z    w h          colour      (octagonal, w = width)
+            pyramid name  x y z    w h d        colour
+            steps   name  x y z    w h d        colour  n   (n steps, rising to -z)
+
+            Colours: #rgb, #rrggbb, or a name (red, gold, navy...)
+            black/white       checkered, 1m squares
+            black/white/0.5   checkered, 0.5m squares
+            white|black       alternating colours per step
+            </pre>
+        </details>
+    </div>
+    <script src="./render.js"></script>
+</body>
+</html>

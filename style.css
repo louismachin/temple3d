@@ -1,0 +1,14 @@
+body { background: navy; color: #c0c0c0; font: 16px "Times New Roman", Times, serif; margin: 0; padding: 12px 16px; display: flex; align-items: center; justify-content: center; flex-direction: column; height: 100vh; }
+h1 { color: #ff0; font-size: 28px; margin: 0; }
+p { margin: 4px 0 10px; }
+canvas { display: block; width: 100%; max-width: 640px; aspect-ratio: 4 / 3; image-rendering: pixelated; border: 2px inset #808080; touch-action: none; cursor: grab; }
+.bar { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+button, label, select { font: 13px Arial, sans-serif; color: #000; background: #c0c0c0; border: 2px outset #fff; padding: 3px 10px; cursor: pointer; }
+button:active, label:active { border-style: inset; }
+:focus-visible { outline: 1px dotted #ff0; outline-offset: 2px; }
+#code { width: 640px; }
+textarea { display: block; box-sizing: border-box; width: 100%; max-width: 640px; height: 280px; background: #000; color: #0f0; border: 2px inset #808080; font: 12px "Courier New", monospace; white-space: pre; }
+details { max-width: 640px; margin-top: 8px; }
+summary { color: #0ff; cursor: pointer; }
+pre { font: 12px "Courier New", monospace; overflow-x: auto; width: 100%; }
+.hidden { display: none };

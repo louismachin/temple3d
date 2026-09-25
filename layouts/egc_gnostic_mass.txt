@@ -1,0 +1,19 @@
+# Gnostic Mass (Liber XV)
+# Units are metres. y is up, -z is East.
+title Gnostic Mass
+
+floor                    8    14            black/white
+# type    name          x    y    z     w    h    d     colour        extra
+steps     dais          0    0   -5     4    0.6  2.4   black/white/0.5 3
+box       high-altar    0    0.6 -5.8   2.2  1    0.7   #e0e0e0
+box       super-altar   0    1.6 -5.95  1.4  0.4  0.4   #c0c0c0
+box       stele         0    2.0 -6.05  0.4  0.6  0.06  #c04000
+pillar    candle-1     -0.9  1.6 -5.8   0.08 0.35       yellow
+pillar    candle-2      0.9  1.6 -5.8   0.08 0.35       yellow
+pillar    black-pillar -1.6  0   -3.2   0.4  2.8        #282828
+pillar    white-pillar  1.6  0   -3.2   0.4  2.8        white
+# box     veil          0    0   -3.4   2.8  2.6  0.05  #004080
+box       small-altar   0    0    0     0.6  1    0.6   #303030
+pillar    font         -0    0    3     0.5  0.9        #0040ff
+box       tomb          0    0    6     2    2.2  1.2   #600080
+pyramid   tomb-roof     0    2.2  6     2.2  0.6  1.4   #400060

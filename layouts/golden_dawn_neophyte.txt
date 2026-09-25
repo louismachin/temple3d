@@ -1,0 +1,51 @@
+# Golden Dawn Neophyte Hall (0=0)
+# Units are metres. y is up, -z is East, -x is North.
+title Golden Dawn - Neophyte Hall
+
+floor                      8    12            black/white
+# type    name            x    y    z     w    h    d     colour         extra
+
+# East: dais with the Hierophant and the Chiefs
+steps     dais            0    0   -5     5    0.45 2     #800000        3
+box       hierophant      0    0.45 -5.6  0.7  0.5  0.6   red
+box       hierophant-bk   0    0.45 -5.95 0.7  1.5  0.1   red
+box       chief-1        -1.5  0.45 -5.6  0.6  0.45 0.6   #c0c0c0
+box       chief-1-bk     -1.5  0.45 -5.95 0.6  1.1  0.1   #c0c0c0
+box       chief-2         1.5  0.45 -5.6  0.6  0.45 0.6   #c0c0c0
+box       chief-2-bk      1.5  0.45 -5.95 0.6  1.1  0.1   #c0c0c0
+pillar    banner-e-pole  -2.2  0.45 -5.7  0.06 2.2        gold
+box       banner-east    -2.2  1.6  -5.7  0.9  0.9  0.03  white
+
+# Pillars, East of the Altar: black to the North, white to the South
+box       black-base     -0.9  0   -2.5   0.5  0.4  0.5   #282828
+pillar    black-pillar   -0.9  0.4 -2.5   0.3  2.2        #282828
+box       black-capital  -0.9  2.6 -2.5   0.45 0.3  0.45  red
+box       white-base      0.9  0   -2.5   0.5  0.4  0.5   white
+pillar    white-pillar    0.9  0.4 -2.5   0.3  2.2        white
+box       white-capital   0.9  2.6 -2.5   0.45 0.3  0.45  red
+
+# Hegemon between the Pillars, facing West
+box       hegemon         0    0   -2.5   0.6  0.45 0.6   white
+box       hegemon-bk      0    0   -2.85  0.6  1.2  0.1   white
+
+# Altar: double cube with the red cross and white triangle
+box       altar           0    0    0     0.5  1    0.5   #282828
+box       cross-a         0    1    0     0.4  0.03 0.1   red
+box       cross-b         0    1    0     0.1  0.03 0.4   red
+pyramid   triangle        0    1.03 0     0.2  0.15 0.2   white
+
+# Officers
+box       kerux          -3.2  0   -3.5   0.6  0.45 0.6   #808080
+box       stolistes      -3.2  0    0     0.6  0.45 0.6   blue
+box       stolistes-bk   -3.55 0    0     0.1  1.2  0.6   blue
+pillar    cup            -2.6  0    0     0.3  0.9        #4080ff
+box       dadouchos       3.2  0    0     0.6  0.45 0.6   red
+box       dadouchos-bk    3.55 0    0     0.1  1.2  0.6   red
+pillar    censer          2.6  0    0     0.3  0.9        orange
+
+# West: Hiereus on a low platform
+box       hiereus-dais    0    0    5.2   2    0.2  1.4   #404040
+box       hiereus         0    0.2  5.2   0.7  0.5  0.6   #282828
+box       hiereus-bk      0    0.2  5.55  0.7  1.5  0.1   #282828
+pillar    banner-w-pole   1.4  0.2  5.5   0.06 2.2        gold
+box       banner-west     1.4  1.35 5.5   0.9  0.9  0.03  black
