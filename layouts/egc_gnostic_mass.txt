@@ -1,6 +1,6 @@
 # Gnostic Mass (Liber XV)
 # Units are metres. y is up, -z is East.
-title Gnostic Mass
+title Liber XV - Gnostic Mass
 
 floor                    8    14            black/white
 # type    name          x    y    z     w    h    d     colour        extra

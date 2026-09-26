@@ -3,7 +3,7 @@
 # Per Flying Roll XVII: every side bears the same 40 symbols in the same places;
 # each square's ground is its force's colour tinted by the side's planet, and the
 # symbol is in the complementary colour. The force colours below are approximate.
-title Vault of the Adepti
+title Golden Dawn - Vault of the Adepti
 
 # type  name      x    y    z     r    h     colour        sides  turn
 room    vault     0    0    0     3    3.5   white|black   7      @180
