@@ -109,9 +109,12 @@ function wall(k, cols, rows, m, text = '', cells) {
 
 const panel = (x, y, z, w, h, cols, rows, m, text = '', cells) => grid([x - w / 2, y, z], [x + w / 2, y, z], y, h, cols, rows, m, text, [x, y, z - 1], cells);
 
-function decal(x, y, z, w, d, m, text = '', dir = 'up') {
-    const s = dir === 'down' ? -1 : 1, P = (i, k) => [x + i * s * w / 2, y, z + k * d / 2];
-    face([P(-1, -1), P(1, -1), P(1, 1), P(-1, 1)], m.a, [x, y - s, z], false, glyph(text, m.b));
+function decal(x, y, z, w, d, m, text = '', dir = 'up', n = 4) {
+    const s = dir === 'down' ? -1 : 1, img = glyph(text, m.b), P = (i, k) => [x + (2 * i / n - 1) * s * w / 2, y, z + (2 * k / n - 1) * d / 2];
+    for (let i = 0; i < n; i++) for (let k = 0; k < n; k++) {
+        face([P(i, k), P(i + 1, k), P(i + 1, k + 1), P(i, k + 1)], m.a, [x, y - s, z], false, img);
+        Object.assign(faces[faces.length - 1], {c: [x, y, z], uv: [i / n, k / n, 1 / n]});
+    }
 }
 
 const floor = (w, d, m) => quad([-w / 2, 0, -d / 2], [w / 2, 0, -d / 2], [w / 2, 0, d / 2], [-w / 2, 0, d / 2], m, [0, -1, 0], true);
@@ -151,7 +154,7 @@ function frame() {
     g.imageSmoothingEnabled = false;
     faces.map(fc => ({fc, p: fc.p.map(V)}))
         .filter(({fc, p}) => p.every(q => q[2] > 0.1) && (wire || dot(R(fc.n), p[0]) < 0))
-        .map(o => (o.z = o.fc.fl ? 1e9 : o.p.reduce((s, q) => s + q[2], 0) / o.p.length, o))
+        .map(o => (o.z = o.fc.fl ? 1e9 : o.fc.c ? V(o.fc.c)[2] - 0.1 : o.p.reduce((s, q) => s + q[2], 0) / o.p.length, o))
         .sort((a, b) => b.z - a.z)
         .forEach(({fc, p}) => {
             const s = p.map(q => [W / 2 - q[0] * f / q[2], H / 2 - q[1] * f / q[2]]);
@@ -163,9 +166,9 @@ function frame() {
             if (fc.img) {
                 g.save();
                 g.clip();
-                const S = fc.img.width;
-                g.setTransform((s[1][0] - s[0][0]) / S, (s[1][1] - s[0][1]) / S, (s[3][0] - s[0][0]) / S, (s[3][1] - s[0][1]) / S, ...s[0]);
-                g.drawImage(fc.img, 0, 0);
+                const [u, v, du] = fc.uv || [0, 0, 1], S = fc.img.width;
+                g.setTransform((s[1][0] - s[0][0]) / 32, (s[1][1] - s[0][1]) / 32, (s[3][0] - s[0][0]) / 32, (s[3][1] - s[0][1]) / 32, ...s[0]);
+                g.drawImage(fc.img, u * S, v * S, du * S, du * S, 0, 0, 32, 32);
                 g.restore();
             }
         });
@@ -196,7 +199,7 @@ $('bRes').onclick = e => { const hi = cv.width === 320; cv.width = hi ? 640 : 32
 $('bTitle').onclick = e => { toggleTitle(); };
 $('bCode').onclick = e => { toggleCode(); };
 
-const loadFile = f => fetch(f).then(r => r.text()).then(setText);
+const loadFile = f => fetch(f, {cache: 'no-store'}).then(r => r.text()).then(setText);
 $('pick').onchange = e => loadFile(e.target.value);
 loadFile($('pick').value);
 frame();

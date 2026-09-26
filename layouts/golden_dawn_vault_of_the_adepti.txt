@@ -43,14 +43,12 @@ wall    jupiter  5    5    8    #8000c0   TA☸EL🜔M1🜄🜁🜍3♄2🜂♂5
 wall    saturn   6    5    8    #4b0082   TA☸EL🜔M1🜄🜁🜍3♄2🜂♂5☉4♃♉♒6♏♌☿8☽7♀♑♎9♋♈♍♊0♓♐
 wall    moon     7    5    8    #0040ff   TA☸EL🜔M1🜄🜁🜍3♄2🜂♂5☉4♃♉♒6♏♌☿8☽7♀♑♎9♋♈♍♊0♓♐
 
-# Floor, ceiling and furniture. "none" = no background, symbol only.
-# type  name         x    y     z     w    d     colour       glyph  facing
-decal   floor-tri    0    0.01  0     3.4  3.4   none|white   ▲
-decal   floor-cross  0    0.02  1.6   0.8  0.8   none|red     ✚
-decal   ceiling-rose 0    3.49  0     3    3     none|#c00000 ✺      down
-
 # type  name         x    y     z     w    h     d     colour
 box     pastos       0    0     0.3   0.7  0.6   1.9   white
 decal   pastos-lid   0    0.61  0.3   0.6  1.8         none|red     ✠
 pillar  altar        0    0    -1.5   0.9  0.9         white
 decal   altar-top    0    0.91 -1.5   0.7  0.7         none|red     ✿
+
+# type  name        x    y     z    w    d    colour  image                     facing
+decal   floor-art   0    0.01  0    3.4  3.4  none    ./images/vault_floor.svg
+decal   ceiling-art 0    3.49  0    3    3    none    ./images/vault_ceiling.svg  down
