@@ -13,8 +13,12 @@ box       chief-1        -1.5  0.45 -5.6  0.6  0.45 0.6   #c0c0c0
 box       chief-1-bk     -1.5  0.45 -5.95 0.6  1.1  0.1   #c0c0c0
 box       chief-2         1.5  0.45 -5.6  0.6  0.45 0.6   #c0c0c0
 box       chief-2-bk      1.5  0.45 -5.95 0.6  1.1  0.1   #c0c0c0
-pillar    banner-e-pole  -2.2  0.45 -5.7  0.06 2.2        gold
-box       banner-east    -2.2  1.6  -5.7  0.9  0.9  0.03  white
+# Banner of the East: white pole, image from images/ (path is relative to index.html)
+pillar    banner-e-pole  -2.2  0.45 -5.75 0.06 2.4        white
+box       banner-e-bar   -2.2  2.5  -5.75 1.1  0.04 0.04  white
+box       banner-east    -2.2  1.3  -5.7  0.9  1.2  0.03  white
+# type    name            x    y    z     w    h    cols rows colour  image
+panel     banner-e-front -2.2  1.3  -5.68 0.9  1.2  1    1    white   ./images/banner_east.svg
 
 # Pillars, East of the Altar: black to the North, white to the South
 box       black-base     -0.9  0   -2.5   0.5  0.4  0.5   #282828
@@ -47,5 +51,8 @@ pillar    censer          2.6  0    0     0.3  0.9        orange
 box       hiereus-dais    0    0    5.2   2    0.2  1.4   #404040
 box       hiereus         0    0.2  5.2   0.7  0.5  0.6   #282828
 box       hiereus-bk      0    0.2  5.55  0.7  1.5  0.1   #282828
-pillar    banner-w-pole   1.4  0.2  5.5   0.06 2.2        gold
-box       banner-west     1.4  1.35 5.5   0.9  0.9  0.03  black
+# Banner of the West, facing East (@180)
+pillar    banner-w-pole   1.4  0    5.55  0.06 2.85       #202020
+box       banner-w-bar    1.4  2.5  5.55  1.1  0.04 0.04  red
+box       banner-west     1.4  1.3  5.5   0.9  1.2  0.03  black
+panel     banner-w-front  1.4  1.3  5.48  0.9  1.2  1    1    black   ./images/banner_west.svg  @180

@@ -12,11 +12,19 @@ const rgb = c => { g.fillStyle = '#000'; g.fillStyle = c; const h = g.fillStyle;
 const mat = (s = 'grey') => { const [a, b, x] = s.split(/[\/|]/); return {a: a === 'none' ? null : rgb(a), b: b && rgb(b), s: +x || 1, fr: x && isNaN(x) && rgb(x), alt: s.includes('|')}; };
 const mix = (c, p, k = 0.4) => c && c.map((v, i) => v + (p[i] - v) * k | 0);
 
+const isPic = s => /\.(svg|png|gif|jpe?g)$/i.test(s);
+
 function glyph(ch, c = [255, 255, 255], fr) {
     const k = ch + c + fr;
     if (!glyphs[k]) {
         const im = glyphs[k] = document.createElement('canvas'), x = im.getContext('2d');
-        im.width = im.height = 32;
+        im.width = im.height = isPic(ch) ? 128 : 32;
+        if (isPic(ch)) {
+            const pic = new Image();
+            pic.onload = () => x.drawImage(pic, 0, 0, 128, 128);
+            pic.src = ch;
+            return im;
+        }
         x.fillStyle = `rgb(${c})`;
         x.font = FONT;
         x.textAlign = 'center';
@@ -42,7 +50,7 @@ function quad(a, b, c, d, m, o, fl) {
 }
 
 function grid(A, B, y, h, cols, rows, m, text, o, cells = '') {
-    const ch = [...text], cc = [...cells], P = (u, v) => [A[0] + (B[0] - A[0]) * u / cols, y + h - h * v / rows, A[2] + (B[2] - A[2]) * u / cols];
+    const ch = isPic(text) ? [text] : [...text], cc = [...cells], P = (u, v) => [A[0] + (B[0] - A[0]) * u / cols, y + h - h * v / rows, A[2] + (B[2] - A[2]) * u / cols];
     for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
         const n = j * cols + i, s = ch[n], cm = pal[cc[n % cc.length]] || pal[s] || m, t = cm !== m && !m.b && m.a;
         const [a, b, fr] = t ? [mix(cm.a, t), mix(cm.b || [255, 255, 255], t.map(v => 255 - v)), mix(cm.fr, t)] : [cm.a, cm.b, cm.fr];
@@ -155,7 +163,8 @@ function frame() {
             if (fc.img) {
                 g.save();
                 g.clip();
-                g.setTransform((s[1][0] - s[0][0]) / 32, (s[1][1] - s[0][1]) / 32, (s[3][0] - s[0][0]) / 32, (s[3][1] - s[0][1]) / 32, ...s[0]);
+                const S = fc.img.width;
+                g.setTransform((s[1][0] - s[0][0]) / S, (s[1][1] - s[0][1]) / S, (s[3][0] - s[0][0]) / S, (s[3][1] - s[0][1]) / S, ...s[0]);
                 g.drawImage(fc.img, 0, 0);
                 g.restore();
             }

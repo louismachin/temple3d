@@ -43,6 +43,10 @@
             </pre>
         </details>
     </div>
-    <script src="./render.js"></script>
+    <script>
+        const s = document.createElement('script');
+        s.src = './render.js?' + Date.now();
+        document.body.append(s);
+    </script>
 </body>
 </html>
