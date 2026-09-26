@@ -4,6 +4,7 @@ const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a
 const lerp = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t), len = (a, b) => Math.hypot(...sub(a, b));
 const L = [-0.4, 0.8, 0.45].map(v => v / Math.hypot(0.4, 0.8, 0.45));
 const FONT = '26px "Apple Symbols", "Segoe UI Symbol", "Noto Sans Symbols 2", "Noto Sans Symbols", "DejaVu Sans", serif';
+let cam = [0, 0];
 let faces = [], walls = [], glyphs = {}, pal = {}, sym = {}, title = '', yaw = Math.PI + 0.6, pitch = 0.5, zoom = 1, base = 20, ty = 1, wire = false, drag = null;
 let spin = !matchMedia('(prefers-reduced-motion: reduce)').matches;
 let showTitle = true;
@@ -121,7 +122,7 @@ const floor = (w, d, m) => quad([-w / 2, 0, -d / 2], [w / 2, 0, -d / 2], [w / 2,
 const shapes = {box, pillar, pyramid, steps, floor, room, wall, panel, decal};
 
 function load(text) {
-    faces = []; walls = []; pal = {}; sym = {}; title = '';
+    faces = []; walls = []; pal = {}; sym = {}; title = ''; cam = [0, 0];
     for (const line of text.split('\n')) {
         const t = line.trim().split(/\s+/), fn = shapes[t[0]], rot = t.find(s => s[0] === '@');
         if (t[0] === 'title') title = t.slice(1).join(' ');
@@ -147,7 +148,7 @@ function frame() {
     if (spin && !drag) yaw += 0.004;
     const W = cv.width, H = cv.height, f = H * 1.4, cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
     const R = ([x, y, z]) => { const X = x * cy - z * sy, Z = x * sy + z * cy; return [X, y * cp + Z * sp, Z * cp - y * sp]; };
-    const V = p => { const q = R([p[0], p[1] - ty, p[2]]); q[2] += base * zoom; return q; };
+    const V = p => { const q = R([p[0] - cam[0], p[1] - ty, p[2] - cam[1]]); q[2] += base * zoom; return q; };
     g.fillStyle = '#000040';
     g.fillRect(0, 0, W, H);
     g.lineWidth = 1;
@@ -198,6 +199,15 @@ $('bWire').onclick = e => { wire = !wire; e.target.textContent = wire ? 'Solid' 
 $('bRes').onclick = e => { const hi = cv.width === 320; cv.width = hi ? 640 : 320; cv.height = hi ? 480 : 240; e.target.textContent = hi ? 'Lo-res' : 'Hi-res'; };
 $('bTitle').onclick = e => { toggleTitle(); };
 $('bCode').onclick = e => { toggleCode(); };
+
+const move = (f, r) => {
+    const s = Math.sin(yaw), c = Math.cos(yaw);
+    cam = [cam[0] + 0.5 * (f * s - r * c), cam[1] + 0.5 * (f * c + r * s)];
+};
+$('bUp').onclick = () => move(1, 0);
+$('bDown').onclick = () => move(-1, 0);
+$('bLeft').onclick = () => move(0, -1);
+$('bRight').onclick = () => move(0, 1);
 
 const loadFile = f => fetch(f, {cache: 'no-store'}).then(r => r.text()).then(setText);
 $('pick').onchange = e => loadFile(e.target.value);

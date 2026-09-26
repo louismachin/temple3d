@@ -11,4 +11,6 @@ textarea { display: block; box-sizing: border-box; width: 100%; max-width: 640px
 details { max-width: 640px; margin-top: 8px; }
 summary { color: #0ff; cursor: pointer; }
 pre { font: 12px "Courier New", monospace; overflow-x: auto; width: 100%; }
-.hidden { display: none };
+.hidden { display: none }
+.move { display: flex; flex-direction: row; align-items: center; }
+.move > div { display: flex; flex-direction: column; }

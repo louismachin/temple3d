@@ -24,6 +24,7 @@
     text-decoration: none;
     color: white;
     cursor: pointer;
+    height: min-content;
 }
 
 .blink.min, .glink.min, .rlink.min, .ylink.min { width: min-content; }
