@@ -204,6 +204,12 @@ const move = (f, r) => {
     const s = Math.sin(yaw), c = Math.cos(yaw);
     cam = [cam[0] + 0.5 * (f * s - r * c), cam[1] + 0.5 * (f * c + r * s)];
 };
+const keys = {ArrowUp: [1, 0], ArrowDown: [-1, 0], ArrowLeft: [0, -1], ArrowRight: [0, 1]};
+addEventListener('keydown', e => {
+    if (!keys[e.key] || e.target.matches('textarea, input, select')) return;
+    e.preventDefault();
+    move(...keys[e.key]);
+});
 $('bUp').onclick = () => move(1, 0);
 $('bDown').onclick = () => move(-1, 0);
 $('bLeft').onclick = () => move(0, -1);
